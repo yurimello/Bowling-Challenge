@@ -3,6 +3,7 @@ require 'main'
 
 RSpec.describe Main do
   subject(:main) { described_class }
+
   let(:game) { file_fixture('perfect.txt') }
 
   context 'when input file is valid' do
@@ -25,17 +26,17 @@ RSpec.describe Main do
 
   context 'when input file is invalid' do
     context 'with invalid characters present' do
-      xit 'raises the corresponding error message' do
+      xit 'raises invalid character exception' do
       end
     end
 
     context 'with invalid score' do
-      xit 'raises the corresponding error message' do
+      xit 'raises exceed max pin downs exception' do
       end
     end
 
     context 'with invalid number of throwings' do
-      xit 'raises the corresponding error message' do
+      xit 'raises exceed max trhowings exception' do
       end
     end
   end
