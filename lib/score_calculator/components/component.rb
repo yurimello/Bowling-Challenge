@@ -4,19 +4,20 @@ class Component
   attr_reader :errors, :children, :id
   attr_accessor :parent, :name, :score
 
-  def initialize(validator_strategy = Validator::ValidatorStrategy.new)
+  def initialize(validator_strategy: Validator::ValidatorStrategy, override_validators: {})
     @errors = {}
     @children = []
     @parent = nil
-    @validator_strategy = validator_strategy
+    @validator_strategy = validator_strategy.new(override_validators: override_validators)
   end
 
   def valid?
     @errors.empty?
   end
 
-  def add(_component)
-    raise NotImplementdMethodError, "not implemented #{__method__}"
+  def add(component)
+    component.parent = self
+    @children << component
   end
 
   # def next
