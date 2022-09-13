@@ -22,3 +22,5 @@ RSpec/RepeatedExampleGroupBody:
 Lint/EmptyBlock:
   Exclude: 
     - spec/lib/main_spec.rb
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
