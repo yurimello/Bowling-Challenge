@@ -18,3 +18,7 @@ Metrics/BlockLength:
     
 RSpec/RepeatedExampleGroupBody:
   Enabled: false
+
+Lint/EmptyBlock:
+  Exclude: 
+    - spec/lib/main_spec.rb

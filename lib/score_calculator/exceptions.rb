@@ -1,0 +1,1 @@
+class NotImplementdMethodError < StandardError; end
