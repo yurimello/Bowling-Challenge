@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../../../lib/validator/validator'
+require_relative '../../../lib/validator/validator'
 
 RSpec.describe Validator::ValidatorStrategy do
   subject(:strategy) { described_class.new }
