@@ -13,8 +13,12 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'simplecov'
+SimpleCov.start
 
 require_relative 'support/file_fixtures'
+require_relative 'support/matrix_fixtures'
+require 'byebug'
 
 RSpec.configure do |config|
   config.include FileFixtures

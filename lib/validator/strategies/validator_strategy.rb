@@ -3,7 +3,9 @@ module Validator
   class ValidatorStrategy
     VALIDATORS = {
       number_range: Validator::NumberRangeValidator,
-      string_presence: Validator::StringPresenceValidator
+      string_presence: Validator::StringPresenceValidator,
+      array_emptiness: Validator::ArrayEmptinessValidator,
+      string_matcher: Validator::StringMatcherValidator
     }.freeze
 
     def initialize(override_validators: {})
@@ -17,6 +19,10 @@ module Validator
       raise Validator::MissingValidatorError, "missing validator: #{validator}" unless @validators[validator]
 
       @validators[validator].new
+    end
+
+    def validate(validator, *args)
+      validation(validator).validate(*args)
     end
   end
 end
