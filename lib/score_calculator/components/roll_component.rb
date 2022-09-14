@@ -6,5 +6,6 @@ class RollComponent < Component
   def add(score)
     @score = score
     validate(:number_range, :score, @score, { min: 0, max: 10 })
+    self
   end
 end

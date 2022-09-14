@@ -1,7 +1,10 @@
 module Validator
   # This class handles which validator will be used with given strategy
   class ValidatorStrategy
-    VALIDATORS = { number_range: Validator::NumberRangeValidator }.freeze
+    VALIDATORS = {
+      number_range: Validator::NumberRangeValidator,
+      string_presence: Validator::StringPresenceValidator
+    }.freeze
 
     def initialize(override_validators: {})
       @validators = VALIDATORS.merge(override_validators)
