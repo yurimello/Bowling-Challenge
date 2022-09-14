@@ -1,4 +1,5 @@
-# This class handles models validations
+# This class was designed to implements Composite pattern
+# It Handles the tree method as `#add` and add components as children and parents
 # @abstract
 class Component
   attr_reader :errors, :children, :id
