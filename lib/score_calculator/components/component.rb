@@ -5,20 +5,17 @@ class Component
   attr_reader :errors, :children, :id
   attr_accessor :parent, :name, :score
 
-  def initialize(validator_strategy: Validator::ValidatorStrategy, override_validators: {})
+  def initialize(validator_strategy = Validator::ComponentValidatorStrategy.new)
     @errors = {}
     @children = []
     @parent = nil
-    @validator_strategy = validator_strategy.new(override_validators: override_validators)
-  end
-
-  def valid?
-    @errors.empty?
+    @validator_strategy = validator_strategy
   end
 
   def add(component)
     component.parent = self
     @children << component
+    self
   end
 
   # def next
@@ -29,20 +26,18 @@ class Component
   #   sorted[my_index + 1]
   # end
 
-  def raise_validation_errors!
-    raise @errors.values.first[:exception], @errors.values.first[:error] if @errors.values.size == 1
+  def validations
+    self
+  end
 
-    raise ValidationError, (@errors.values.map { |e| e[:error] })
+  def valid?
+    @errors.empty?
   end
 
   private
-
-  def use_validator(validator)
-    @validator_strategy.validation(validator)
-  end
-
-  def validate(validator, on, value, options = {})
-    validation = use_validator(validator).validate(on, value, options)
+  def validate(*args)
+    validator, on = *args
+    validation = @validator_strategy.validate(*args)
     if validation.valid?
       @errors.delete(on)
     else

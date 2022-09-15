@@ -8,17 +8,14 @@ module Validator
       string_matcher: Validator::StringMatcherValidator
     }.freeze
 
-    def initialize(override_validators: {})
-      @validators = VALIDATORS.merge(override_validators)
-    end
 
     # Handles strategy
     # @param validator [Symbol] the validator class will be used
     # @return [Validator::BaseValidator] validator to use
     def validation(validator)
-      raise Validator::MissingValidatorError, "missing validator: #{validator}" unless @validators[validator]
+      raise Validator::MissingValidatorError, "missing validator: #{validator}" unless VALIDATORS[validator]
 
-      @validators[validator].new
+      VALIDATORS[validator].new
     end
 
     def validate(validator, *args)
