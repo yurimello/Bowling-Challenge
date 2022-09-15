@@ -5,7 +5,7 @@ RSpec.describe GameComponent do
   subject(:game_component) { described_class.new }
 
   let(:player) { instance_double(PlayerComponent, { 'parent=' => game_component }) }
-  let(:add_player) { game_component.add(player).validations }
+  let(:add_player) { game_component.add(player).run_validations }
 
   context 'with player' do
     it 'is valid' do
@@ -15,7 +15,7 @@ RSpec.describe GameComponent do
 
   context 'without player' do
     it 'is invalid' do
-      expect(game_component.validations).not_to be_valid
+      expect(game_component.run_validations).not_to be_valid
     end
   end
 end

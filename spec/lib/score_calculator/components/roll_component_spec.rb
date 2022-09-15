@@ -8,7 +8,7 @@ RSpec.describe RollComponent do
     let(:score) { 10 }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).to be_valid
+      expect(roll_component.add(score).run_validations).to be_valid
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe RollComponent do
     let(:score) { -10 }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).not_to be_valid
+      expect(roll_component.add(score).run_validations).not_to be_valid
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe RollComponent do
     let(:score) { 15 }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).not_to be_valid
+      expect(roll_component.add(score).run_validations).not_to be_valid
     end
   end
 
@@ -32,7 +32,7 @@ RSpec.describe RollComponent do
     let(:score) { nil }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).not_to be_valid
+      expect(roll_component.add(score).run_validations).not_to be_valid
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe RollComponent do
     let(:score) { '' }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).not_to be_valid
+      expect(roll_component.add(score).run_validations).not_to be_valid
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe RollComponent do
     let(:score) { 'ten' }
 
     it 'is valid' do
-      expect(roll_component.add(score).validations).not_to be_valid
+      expect(roll_component.add(score).run_validations).not_to be_valid
     end
   end
 end

@@ -14,7 +14,7 @@ RSpec.describe LastFrameComponent do
     frame_component.add(roll1)
     frame_component.add(roll2)
     frame_component.add(roll3)
-    frame_component.validations
+    frame_component.run_validations
   end
 
   context 'with all strikes' do
@@ -35,8 +35,8 @@ RSpec.describe LastFrameComponent do
     let(:score2) { 3 }
     let(:score3) { 3 }
 
-    it 'is invalid' do
-      expect(add_component).not_to be_valid
+    it 'is valid' do
+      expect(add_component).to be_valid
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe LastFrameComponent do
   context 'with only one roll and it is a strike' do
     let(:add_component) do
       frame_component.add(roll1)
-      frame_component.validations
+      frame_component.run_validations
     end
 
     it 'is invalid' do

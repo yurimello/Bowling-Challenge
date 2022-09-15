@@ -1,8 +1,8 @@
 # This class handles player frames
 # Validates existance of rolls
 class LastFrameComponent < Component
-  def validations
-    validate(:last_frame_strike, :frame_strike, children)
+  def run_validations
+    validate(:last_frame_strike, (name&.downcase || :last_frame).to_sym, children)
     self
   end
 end

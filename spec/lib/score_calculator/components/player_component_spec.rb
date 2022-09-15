@@ -10,7 +10,7 @@ RSpec.describe PlayerComponent do
       frame = instance_double(FrameComponent, { 'parent=' => player_component })
       player_component.add(frame)
     end
-    player_component.validations
+    player_component.run_validations
   end
 
   context 'with name and frames' do

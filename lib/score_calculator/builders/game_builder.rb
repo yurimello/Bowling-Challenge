@@ -1,5 +1,7 @@
+# This class build and validates game
 class GameBuilder
   attr_reader :game
+
   def initialize
     @game = GameComponent.new
   end
@@ -15,41 +17,41 @@ class GameBuilder
     frame = last_frame_next?(player_name) ? LastFrameComponent.new : FrameComponent.new
     frame.name = frame_name
     game_player(player_name).add(frame)
-    
+
     self
   end
 
   def add_roll(player_name, score)
     roll = RollComponent.new
-    roll.add(score).validations
+    roll.add(score).run_validations
     current_frame(player_name).add(roll)
-    
+
     self
   end
 
   def validate_game!(component = @game)
+    component.run_validations
+
     raise_validations!(component)
 
-    component.children do |child_component|
+    component.children.each do |child_component|
       validate_game!(child_component)
     end
   end
 
   private
-  def raise_validations!(component)
-    return true if component.valid?
 
-    component.errors.each do |error|
-      raise error.exception, error.error
-    end
+  def raise_validations!(component)
+    error = component.errors.values.first
+    raise(error[:exception], error[:error]) if error
   end
 
   def current_frame(player_name)
     game_player(player_name).children.last
   end
-  
+
   def last_frame_next?(player_name)
-    game_player.children.size == MAX_FRAMES - 1
+    game_player(player_name).children.size == MAX_FRAMES - 1
   end
 
   def game_player(player_name)
