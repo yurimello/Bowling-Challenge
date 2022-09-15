@@ -3,8 +3,7 @@
 class PlayerComponent < Component
   # @param component [FrameComponent] the frame component
   # @retrun [PlayerComponent] validated and with stored rolls
-  def add(component)
-    super
+  def validations
     validate(:number_range, :frames, children.size, { min: 10, max: 10 })
     validate(:string_presence, :name, name)
     self
