@@ -35,8 +35,9 @@ class Component
   end
 
   private
+
   def validate(*args)
-    validator, on = *args
+    _validator, on = *args
     validation = @validator_strategy.validate(*args)
     if validation.valid?
       @errors.delete(on)
