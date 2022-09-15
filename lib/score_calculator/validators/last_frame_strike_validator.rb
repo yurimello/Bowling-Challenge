@@ -7,13 +7,28 @@ module Validator
     # @param options [Hash] with `min:` and `max:` options
     # @return [Validator::StrikeValidator]
     def validate(on, value)
-      total_rolls = value.size
-      return self if value.first.score == STRIKE && total_rolls == LAST_FRAME_MAX_STRIKE
-      return self if total_rolls == 2
+      if exceeded_rolls?(value) || unavailable_extra_rolls?(value) || strike_withou_extra_rolls?(value)
+        @error = "Invalid Strike on #{on}"
+        @exception = InvalidStrike
+        return self
+      end
 
-      @error = "Invalid Strike on #{on}"
-      @exception = InvalidStrike
       self
+    end
+
+    private
+
+    def exceeded_rolls?(value)
+      value.size > LAST_FRAME_MAX_STRIKE
+    end
+
+    def unavailable_extra_rolls?(value)
+      first_two_scores = value.first(2)&.sum(&:score)
+      first_two_scores < STRIKE && value.size >= LAST_FRAME_MAX_STRIKE
+    end
+
+    def strike_withou_extra_rolls?(value)
+      value.first.score == STRIKE && value.size == 1
     end
   end
 end

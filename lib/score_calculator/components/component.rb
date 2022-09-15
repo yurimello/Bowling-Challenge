@@ -18,14 +18,6 @@ class Component
     self
   end
 
-  # def next
-  #   sorted = brothers&.sort(&:id)
-  #   return nil if sorted.nil?
-
-  #   my_index = sorted.index(self)
-  #   sorted[my_index + 1]
-  # end
-
   def run_validations
     self
   end

@@ -17,6 +17,18 @@ RSpec.describe CreateGameService do
     it { expect(service_response).to be_valid }
   end
 
+  context 'when last frame has neither strike or spare' do
+    let(:fixture) { 'last_frame_without_strike_or_spare.json' }
+
+    it { expect(service_response).to be_valid }
+  end
+
+  context 'when last frame is a spare' do
+    let(:fixture) { 'last_frame_spare.json' }
+
+    it { expect(service_response).to be_valid }
+  end
+
   context 'with two players' do
     let(:fixture) { 'scores.json' }
 
