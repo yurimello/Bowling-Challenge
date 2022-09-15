@@ -8,7 +8,6 @@ module Validator
       string_matcher: Validator::StringMatcherValidator
     }.freeze
 
-
     # Handles strategy
     # @param validator [Symbol] the validator class will be used
     # @return [Validator::BaseValidator] validator to use

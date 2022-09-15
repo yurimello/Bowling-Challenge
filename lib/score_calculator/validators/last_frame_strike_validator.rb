@@ -6,7 +6,7 @@ module Validator
     # @param value [Array[Number]] the value that will be validated
     # @param options [Hash] with `min:` and `max:` options
     # @return [Validator::StrikeValidator]
-    def validate(on, value, _options)
+    def validate(on, value)
       total_score = value.sum(&:score)
       total_rolls = value.size
       many_strikes = total_score / STRIKE
