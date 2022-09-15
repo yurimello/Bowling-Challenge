@@ -1,11 +1,13 @@
 require_relative './last_frame_strike_validator'
 require_relative './strike_validator'
+require_relative './min_players_validator'
 module Validator
   # This class handles which validator will be used with given strategy
   class ComponentValidatorStrategy < Validator::ValidatorStrategy
     COMPONENT_VALIDATORS = {
       last_frame_strike: Validator::LastFrameStrikeValidator,
-      strike: Validator::StrikeValidator
+      strike: Validator::StrikeValidator,
+      min_players: Validator::MinPlayersValidator
     }.freeze
 
     # Handles strategy

@@ -8,7 +8,7 @@ class RollComponent < Component
     self
   end
 
-  def validations
+  def run_validations
     validate(:number_range, :score, @score, { min: 0, max: 10 })
   end
 end

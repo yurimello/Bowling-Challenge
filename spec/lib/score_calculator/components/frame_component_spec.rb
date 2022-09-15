@@ -11,7 +11,7 @@ RSpec.describe FrameComponent do
   let(:add_component) do
     frame_component.add(roll1)
     frame_component.add(roll2)
-    frame_component.validations
+    frame_component.run_validations
   end
 
   context 'with valid rolls' do
@@ -34,7 +34,7 @@ RSpec.describe FrameComponent do
     let(:add_three_components) do
       add_component
       frame_component.add(roll3)
-      frame_component.validations
+      frame_component.run_validations
     end
 
     it 'is invalid' do

@@ -15,7 +15,6 @@ class Component
   def add(component)
     component.parent = self
     @children << component
-    validations
     self
   end
 
@@ -27,7 +26,7 @@ class Component
   #   sorted[my_index + 1]
   # end
 
-  def validations
+  def run_validations
     self
   end
 
