@@ -15,6 +15,7 @@ class Component
   def add(component)
     component.parent = self
     @children << component
+    validations
     self
   end
 
