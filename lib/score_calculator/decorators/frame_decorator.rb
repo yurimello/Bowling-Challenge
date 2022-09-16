@@ -2,8 +2,8 @@ require 'delegate'
 # This class is used to decorate FrameComponent and calculate its score
 class FrameDecorator < SimpleDelegator
   def calculate_roll_scores
-    return ['', 'X'] if strike?
-    return [rolls.first, '/'] if spare?
+    return ['X'] if strike?
+    return [rolls.first.score_with_foul, '/'] if spare?
 
     rolls.map(&:score_with_foul)
   end
