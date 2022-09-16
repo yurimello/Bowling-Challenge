@@ -21,9 +21,9 @@ class CalculateScoreService < BaseService
     decorated_frame = decorate_frame(frame)
     frame.score = decorated_frame.calculate_score
     calculated_roll_scores = decorated_frame.calculate_roll_scores
-
-    frame.children.each_with_index do |roll, index|
-      roll.score = calculated_roll_scores[index]
+    calculated_roll_scores.each_with_index do |score, index|
+      roll = frame.children[index]
+      roll.score = score
     end
   end
 

@@ -24,12 +24,12 @@ RSpec.describe CalculateScoreService do
   context 'when last frame has neither strike or spare' do
     let(:fixture) { 'last_frame_without_strike_or_spare.json' }
 
-    it { expect(frames.map(&:score)).to include(269) }
+    it { expect(frames.map(&:score)).to include(255) }
   end
 
   context 'when last frame is a spare' do
     let(:fixture) { 'last_frame_spare.json' }
 
-    it { expect(frames.map(&:score)).to include(280) }
+    it { expect(frames.map(&:score)).to include(270) }
   end
 end

@@ -18,17 +18,13 @@ class Component
     self
   end
 
-  def run_validations
-    self
-  end
+  def run_validations; end
 
   def valid?
     @errors.empty?
   end
 
-  def score_with_foul
-    score
-  end
+  def score_with_foul; end
 
   private
 

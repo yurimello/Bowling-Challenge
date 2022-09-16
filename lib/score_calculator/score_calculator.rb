@@ -3,8 +3,8 @@ require_relative '../validator/validator'
 Dir[File.join(__dir__, '.', '**', '*.rb')].sort.each { |file| require file }
 
 # Entrypoint for StoreCalculator module
-class StoreCalculator
-  include Callable
+class ScoreCalculator
+  extend Callable
 
   SERVICES = [
     MapInputMatrixService,
@@ -14,7 +14,6 @@ class StoreCalculator
   ].freeze
 
   def call(matrix)
-    output = ServicesPipeline.call(matrix, SERVICES)
-    p output
+    ServicesPipeline.call(matrix, SERVICES)
   end
 end

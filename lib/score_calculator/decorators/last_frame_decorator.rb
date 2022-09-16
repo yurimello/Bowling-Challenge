@@ -1,16 +1,24 @@
 # This class is used to decorate LastFrameComponent and calculate its score
 class LastFrameDecorator < FrameDecorator
   def calculate_roll_scores
-    first_two_rolls = rolls.first(2)
-    roll_scores = if strike?
-                    %w[X X]
-                  elsif spare?
-                    [rolls.first.score, '/']
-                  else
-                    first_two_rolls.map(&:score_with_foul)
-                  end
+    roll_scores = []
+
+    rolls.first(2).each_with_index do |roll, index|
+      roll_scores << roll_score(roll, index)
+    end
+
     roll_scores << last_roll_score if rolls.size == LAST_FRAME_MAX_STRIKE
     roll_scores
+  end
+
+  def roll_score(roll, index)
+    if spare?(rolls, index)
+      '/'
+    elsif roll.score == STRIKE
+      'X'
+    else
+      roll.score_with_foul
+    end
   end
 
   def calculate_score
@@ -22,8 +30,8 @@ class LastFrameDecorator < FrameDecorator
     rolls.first.score == STRIKE
   end
 
-  def spare?
-    rolls.first(2).map(&:score).sum == STRIKE
+  def spare?(rolls, index)
+    index == 1 && rolls.first(2).sum(&:score) == STRIKE
   end
 
   private

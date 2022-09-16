@@ -1,6 +1,9 @@
-require 'delegate'
 # This class is used to decorate FrameComponent and calculate its score
-class FrameDecorator < SimpleDelegator
+class FrameDecorator
+  def initialize(object)
+    @object = object
+  end
+
   def calculate_roll_scores
     return ['X'] if strike?
     return [rolls.first.score_with_foul, '/'] if spare?
@@ -33,7 +36,7 @@ class FrameDecorator < SimpleDelegator
   private
 
   def rolls
-    delegated.children
+    decorated.children
   end
 
   def next_rolls(qty = 1)
@@ -42,23 +45,23 @@ class FrameDecorator < SimpleDelegator
   end
 
   def next_frames(qty = 1)
-    self_index = related_frames.index(delegated)
-    position = self_index + qty
-    related_frames.slice(self_index, position)
+    next_index = related_frames.index(decorated) + 1
+    to_position = next_index + (qty - 1)
+    related_frames.slice(next_index, to_position)
   end
 
   def previous_frame
-    self_index = related_frames.index(delegated)
+    self_index = related_frames.index(decorated)
     return nil if self_index.zero?
 
     related_frames[self_index - 1]
   end
 
   def related_frames
-    @related_frames ||= delegated.parent.children.sort_by(&:id)
+    @related_frames ||= decorated.parent.children.sort_by(&:id)
   end
 
-  def delegated
-    __getobj__
+  def decorated
+    @object
   end
 end

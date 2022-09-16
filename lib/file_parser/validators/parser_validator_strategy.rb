@@ -12,9 +12,7 @@ module Validator
     # @param validator [Symbol] the validator class will be used
     # @return [Validator::BaseValidator] validator to use
     def validation(validator)
-      return PARSER_VALIDATORS[validator].new if PARSER_VALIDATORS[validator]
-
-      super
+      PARSER_VALIDATORS[validator]&.new
     end
   end
 end
