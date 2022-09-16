@@ -1,7 +1,7 @@
 # This service class recieves a calculated game
 # generates outpu
 # responds with output stream
-class GenerateOutPut < BaseService
+class GenerateOutputService < BaseService
   def call(game)
     @response = "#{header}\n"
     game.children.each do |player|
