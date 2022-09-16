@@ -3,7 +3,7 @@ class LastFrameDecorator < FrameDecorator
   def calculate_roll_scores
     first_two_rolls = rolls.first(2)
     roll_scores = if strike?
-                    ['', 'X']
+                    %w[X X]
                   elsif spare?
                     [rolls.first.score, '/']
                   else
@@ -29,6 +29,6 @@ class LastFrameDecorator < FrameDecorator
   private
 
   def last_roll_score
-    rolls.last == STRIKE ? 'X' : rolls.last.score_with_foul
+    rolls.last.score == STRIKE ? 'X' : rolls.last.score_with_foul
   end
 end
