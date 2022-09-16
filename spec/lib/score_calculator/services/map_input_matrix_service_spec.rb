@@ -23,8 +23,7 @@ RSpec.describe MapInputMatrixService do
   context 'with two players' do
     let(:fixture) { 'scores.txt' }
 
-    it 'responds a hash with 2 players and 10 frames(contining only integer) each', :aggregate_failures do
-      expect(service_response.values.flatten).to all(be_an(Integer))
+    it 'responds a hash with 2 players and 10 frames each', :aggregate_failures do
       expect(service_response.values[0].size).to eq(10)
       expect(service_response.values[1].size).to eq(10)
       expect(service_response.values[0].last.size).to eq(3)

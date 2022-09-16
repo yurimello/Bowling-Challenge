@@ -2,8 +2,8 @@
 # It Handles the tree method as `#add` and add components as children and parents
 # @abstract
 class Component
-  attr_reader :errors, :children, :id
-  attr_accessor :parent, :name, :score
+  attr_reader :errors, :children, :foul
+  attr_accessor :parent, :name, :score, :id
 
   def initialize(validator_strategy = Validator::ComponentValidatorStrategy.new)
     @errors = {}
@@ -24,6 +24,10 @@ class Component
 
   def valid?
     @errors.empty?
+  end
+
+  def score_with_foul
+    score
   end
 
   private

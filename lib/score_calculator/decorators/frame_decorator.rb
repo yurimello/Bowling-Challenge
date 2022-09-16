@@ -1,6 +1,13 @@
 require 'delegate'
 # This class is used to decorate FrameComponent and calculate its score
 class FrameDecorator < SimpleDelegator
+  def calculate_roll_scores
+    return ['', 'X'] if strike?
+    return [rolls.first, '/'] if spare?
+
+    rolls.map(&:score_with_foul)
+  end
+
   def calculate_score
     score = previous_frame&.score.to_i
     score += rolls.sum(&:score)
@@ -35,20 +42,20 @@ class FrameDecorator < SimpleDelegator
   end
 
   def next_frames(qty = 1)
-    position = qty - 1
     self_index = related_frames.index(delegated)
+    position = self_index + qty
     related_frames.slice(self_index, position)
   end
 
   def previous_frame
     self_index = related_frames.index(delegated)
-    return [] if self_index.zero?
+    return nil if self_index.zero?
 
     related_frames[self_index - 1]
   end
 
   def related_frames
-    @related_frames ||= delegated.parent.children.sort(&:name)
+    @related_frames ||= delegated.parent.children.sort_by(&:id)
   end
 
   def delegated
