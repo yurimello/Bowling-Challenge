@@ -1,5 +1,5 @@
 # This class is used to decorate FrameComponent and calculate its score
-class FrameDecorator
+class FrameCalculator
   def initialize(object)
     @object = object
   end
@@ -25,6 +25,8 @@ class FrameDecorator
     score + next_rolls(rolls_qty).sum(&:score)
   end
 
+  private
+
   def strike?
     rolls.first.score == STRIKE
   end
@@ -32,8 +34,6 @@ class FrameDecorator
   def spare?
     rolls.map(&:score).sum == STRIKE
   end
-
-  private
 
   def rolls
     decorated.children
@@ -58,7 +58,7 @@ class FrameDecorator
   end
 
   def related_frames
-    @related_frames ||= decorated.parent.children.sort_by(&:id)
+    @related_frames ||= decorated.parent.children
   end
 
   def decorated

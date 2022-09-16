@@ -1,3 +1,5 @@
+[project trello board](https://trello.com/b/lTnnXQLv/ten-pin-bowling-score-calculator)
+
 ### Instaling dependecies
 
 `bundle install`

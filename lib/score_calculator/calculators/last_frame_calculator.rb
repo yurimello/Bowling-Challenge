@@ -1,5 +1,5 @@
 # This class is used to decorate LastFrameComponent and calculate its score
-class LastFrameDecorator < FrameDecorator
+class LastFrameCalculator < FrameCalculator
   def calculate_roll_scores
     roll_scores = []
 
@@ -26,15 +26,11 @@ class LastFrameDecorator < FrameDecorator
     score + rolls.sum(&:score)
   end
 
-  def strike?
-    rolls.first.score == STRIKE
-  end
+  private
 
   def spare?(rolls, index)
     index == 1 && rolls.first(2).sum(&:score) == STRIKE
   end
-
-  private
 
   def last_roll_score
     rolls.last.score == STRIKE ? 'X' : rolls.last.score_with_foul

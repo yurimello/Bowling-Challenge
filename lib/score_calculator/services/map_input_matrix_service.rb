@@ -37,7 +37,7 @@ class MapInputMatrixService < BaseService
     return player if player.last.size == 1
 
     first_score = player.last.first.to_s.match?(/f/i) ? 0 : player.last.first
-    return player if first_score < 10 && player.last.size == 2
+    return player if first_score < STRIKE && player.last.size == 2
 
     new_frame = [player.last.pop]
     player << new_frame

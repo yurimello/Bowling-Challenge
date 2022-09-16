@@ -4,28 +4,32 @@ class GameBuilder
 
   def initialize
     @game = GameComponent.new
+    @game.id = 1
   end
 
-  def add_player(player_name)
+  def add_player(player_name, player_id)
     player = PlayerComponent.new
     player.name = player_name
+    player.id = player_id
+    @player_id = player_id
     @game.add(player)
     self
   end
 
-  def add_frame(player_name, frame_id)
-    frame = last_frame_next?(player_name) ? LastFrameComponent.new : FrameComponent.new
+  def add_frame(frame_id)
+    frame = last_frame_next? ? LastFrameComponent.new : FrameComponent.new
     frame.id = frame_id
     frame.name = "Frame #{frame.id}"
-    game_player(player_name).add(frame)
+    game_player.add(frame)
 
     self
   end
 
-  def add_roll(player_name, score)
+  def add_roll(score, roll_id)
     roll = RollComponent.new
+    roll.id = roll_id
     roll.add(score).run_validations
-    current_frame(player_name).add(roll)
+    current_frame.add(roll)
 
     self
   end
@@ -47,17 +51,17 @@ class GameBuilder
     raise(error[:exception], error[:error]) if error
   end
 
-  def current_frame(player_name)
-    game_player(player_name).children.last
+  def current_frame
+    game_player.children.last
   end
 
-  def last_frame_next?(player_name)
-    game_player(player_name).children.size == MAX_FRAMES - 1
+  def last_frame_next?
+    game_player.children.size == MAX_FRAMES - 1
   end
 
-  def game_player(player_name)
+  def game_player
     @game.children.find do |player|
-      player.name == player_name
+      player.id == @player_id
     end
   end
 end

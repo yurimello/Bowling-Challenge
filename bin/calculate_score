@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/main'
-puts Main.call(ARGV[0])
+Main.call(ARGV[0])
