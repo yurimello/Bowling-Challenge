@@ -13,9 +13,10 @@ class GameBuilder
     self
   end
 
-  def add_frame(player_name, frame_name)
+  def add_frame(player_name, frame_id)
     frame = last_frame_next?(player_name) ? LastFrameComponent.new : FrameComponent.new
-    frame.name = frame_name
+    frame.id = frame_id
+    frame.name = "Frame #{frame.id}"
     game_player(player_name).add(frame)
 
     self

@@ -23,7 +23,7 @@ class MapInputMatrixService < BaseService
     player_name, score = row
     validate(:string_matcher, :score, score, /(\d|f){1,2}/i)
 
-    score = score.gsub(/( |f)/i, '0').to_i
+    score = score.to_i if score.match?(/\d+/)
     [player_name, score]
   end
 
@@ -35,7 +35,9 @@ class MapInputMatrixService < BaseService
   def handle_frame(player)
     return player if player.size >= MAX_FRAMES
     return player if player.last.size == 1
-    return player if player.last.first < 10 && player.last.size == 2
+
+    first_score = player.last.first.to_s.match?(/f/i) ? 0 : player.last.first
+    return player if first_score < 10 && player.last.size == 2
 
     new_frame = [player.last.pop]
     player << new_frame

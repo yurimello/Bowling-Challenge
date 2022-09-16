@@ -16,8 +16,8 @@ class CreateGameService < BaseService
 
   def add_frames(builder, player_name, frames)
     frames.each_with_index do |frame, index|
-      frame_name = "Frame #{index + 1}"
-      builder.add_frame(player_name, frame_name)
+      frame_id = index + 1
+      builder.add_frame(player_name, frame_id)
       frame.each do |roll|
         builder.add_roll(player_name, roll)
       end
