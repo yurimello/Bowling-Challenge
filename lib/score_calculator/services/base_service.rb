@@ -13,10 +13,7 @@ class BaseService
     @validator_strategy = validator_strategy
   end
 
-  def call(object)
-    @response = object
-    self
-  end
+  def call(object); end
 
   private
 

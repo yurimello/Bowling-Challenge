@@ -1,0 +1,4 @@
+Frame		1		2		3		4		5		6		7		8		9		10
+Carl
+Pinfalls		X		X		X		X		X		X		X		X		X	0	/	X
+Score		30		60		90		120		150		180		210		230		250		270

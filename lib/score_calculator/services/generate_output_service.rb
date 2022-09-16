@@ -18,18 +18,22 @@ class GenerateOutputService < BaseService
   end
 
   def output_frames(frames)
-    @response << "Pinfalls\t"
-    frames.map(&:children).flatten.each_with_index do |roll, index|
-      @response << output_roll(roll, index)
+    output_rolls = ''
+    output_frames = ''
+    frames.each do |frame|
+      frame.children.each do |roll|
+        output_rolls << output_roll(roll, frame.name)
+      end
+      output_frames << "#{frame.score}\t\t"
     end
-    @response << "\n"
-    frame_scores = frames.map(&:score).join("\t\t")
-    @response << "Score\t\t#{frame_scores}\n"
+
+    @response << "Pinfalls\t#{output_rolls}\n"
+    @response << "Score\t\t#{output_frames}\n"
   end
 
-  def output_roll(roll, index)
+  def output_roll(roll, frame_name)
     output = "#{roll.score}\t"
-    return output if index >= 9
+    return output if frame_name == 'Frame 10'
 
     output.gsub(/^x/i, "\tX")
   end
