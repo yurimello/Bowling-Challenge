@@ -7,7 +7,7 @@ RSpec.describe PlayerComponent do
   let(:name) { 'Player' }
   let(:add_frames) do
     10.times do
-      frame = instance_double(FrameComponent, { 'parent=' => player_component })
+      frame = instance_double(FrameComponent, { 'parent=' => player_component, id: 1 })
       player_component.add(frame)
     end
     player_component.run_validations

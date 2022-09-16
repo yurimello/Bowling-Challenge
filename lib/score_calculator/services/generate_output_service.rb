@@ -14,7 +14,7 @@ class GenerateOutputService < BaseService
   private
 
   def header
-    ['Frame'].concat((1..10).to_a).join("\t\t")
+    ['Frame'].concat((1..MAX_FRAMES).to_a).join("\t\t")
   end
 
   def output_frames(frames)
@@ -22,7 +22,7 @@ class GenerateOutputService < BaseService
     output_frames = ''
     frames.each do |frame|
       frame.children.each do |roll|
-        output_rolls << output_roll(roll, frame.name)
+        output_rolls << output_roll(roll, frame)
       end
       output_frames << "#{frame.score}\t\t"
     end
@@ -31,9 +31,9 @@ class GenerateOutputService < BaseService
     @response << "Score\t\t#{output_frames}\n"
   end
 
-  def output_roll(roll, frame_name)
-    output = "#{roll.score}\t"
-    return output if frame_name == 'Frame 10'
+  def output_roll(roll, frame)
+    output = "#{roll.name}\t"
+    return output if frame.id == MAX_FRAMES
 
     output.gsub(/^x/i, "\tX")
   end

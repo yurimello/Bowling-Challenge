@@ -4,7 +4,7 @@ require_relative '../../../../lib/score_calculator/score_calculator'
 RSpec.describe GameComponent do
   subject(:game_component) { described_class.new }
 
-  let(:player) { instance_double(PlayerComponent, { 'parent=' => game_component }) }
+  let(:player) { instance_double(PlayerComponent, { 'parent=' => game_component, id: 1 }) }
   let(:add_player) { game_component.add(player).run_validations }
 
   context 'with player' do

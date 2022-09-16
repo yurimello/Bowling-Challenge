@@ -4,9 +4,9 @@ require_relative '../../../../lib/score_calculator/score_calculator'
 RSpec.describe LastFrameComponent do
   subject(:frame_component) { described_class.new }
 
-  let(:roll1) { instance_double(RollComponent, { score: score1, 'parent=' => frame_component }) }
-  let(:roll2) { instance_double(RollComponent, { score: score2, 'parent=' => frame_component }) }
-  let(:roll3) { instance_double(RollComponent, { score: score3, 'parent=' => frame_component }) }
+  let(:roll1) { instance_double(RollComponent, { score: score1, 'parent=' => frame_component, id: 1 }) }
+  let(:roll2) { instance_double(RollComponent, { score: score2, 'parent=' => frame_component, id: 2 }) }
+  let(:roll3) { instance_double(RollComponent, { score: score3, 'parent=' => frame_component, id: 3 }) }
   let(:score1) { 10 }
   let(:score2) { 10 }
   let(:score3) { 10 }

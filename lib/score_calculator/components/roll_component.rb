@@ -12,7 +12,7 @@ class RollComponent < Component
   end
 
   def run_validations
-    validate(:number_range, :score, @score, { min: 0, max: 10 })
+    validate(:number_range, :score, @score, { min: 0, max: STRIKE })
   end
 
   def score_with_foul

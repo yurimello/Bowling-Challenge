@@ -2,13 +2,13 @@
 # and calculates its scores
 # responds with a copy of game object
 class CalculateScoreService < BaseService
-  def call(game, frame_decorator = FrameDecorator, last_frame_decorator = LastFrameDecorator)
-    @frame_decorator = frame_decorator
-    @last_frame_decorator = last_frame_decorator
+  def call(game, frame_calculator = FrameCalculator, last_frame_calculator = LastFrameCalculator)
+    @frame_calculator = frame_calculator
+    @last_frame_calculator = last_frame_calculator
 
     @response = game
     @response.children.each do |player|
-      player.children.sort_by(&:id).each do |frame|
+      player.children.each do |frame|
         calculate_frame(frame)
       end
     end
@@ -23,13 +23,13 @@ class CalculateScoreService < BaseService
     calculated_roll_scores = decorated_frame.calculate_roll_scores
     calculated_roll_scores.each_with_index do |score, index|
       roll = frame.children[index]
-      roll.score = score
+      roll.name = score
     end
   end
 
   def decorate_frame(frame)
-    return @frame_decorator.new(frame) if frame.instance_of?(FrameComponent)
+    return @frame_calculator.new(frame) if frame.id < MAX_FRAMES
 
-    @last_frame_decorator.new(frame)
+    @last_frame_calculator.new(frame)
   end
 end
